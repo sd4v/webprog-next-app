@@ -32,13 +32,22 @@ export default function Home() {
 
   const [members, setMembers] = useState(initData);
 
+  const saveMember = data => {
+    setMembers(prevMembers => prevMembers.map(
+      prevMember => prevMember.id !== data.id 
+        ? prevMember 
+        : data
+    ));
+  };
+
+
   return (
     <Container fluid>
       <Row>
         {members.map(member=> (
           <Col sm={6} md={4} lg={3} xl={2} key={member.id}
               className={styles.memberCol}>
-            <Member {...member}/>
+            <Member {...member} saveMember={saveMember}/>
           </Col>
         ))}
       </Row>

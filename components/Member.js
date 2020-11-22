@@ -16,7 +16,7 @@ export const occupation = {
 };
 
 
-function Member({ name, occupation }) {
+function Member({ id, name, occupation, saveMember }) {
 
   const [editing, setEditing] = useState(false);
 
