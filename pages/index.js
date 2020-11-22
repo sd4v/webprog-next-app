@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Button } from "react-bootstrap";
 import Member, { occupation } from "../components/Member";
 import styles from "./index.module.css";
 
@@ -28,6 +28,13 @@ const initData = [
 ];
 
 
+const getDefaultMember = id => ({
+  id,
+  name: "New member",
+  occupation: occupation.worker,
+});
+
+
 export const MemberContext = React.createContext({});
 
 
@@ -52,8 +59,23 @@ export default function Home() {
   };
 
 
+  const addMember = () => {
+    setMembers(prevMembers => {
+      const defaultMember = getDefaultMember(prevMembers.length + 1);
+      return [...prevMembers, defaultMember];
+    });
+  };
+
+
   return (
     <Container fluid>
+      <Row className={styles.addRow}>
+        <Col xs={12}>
+          <Button onClick={addMember} className={styles.addButton}>
+            Add new member
+          </Button>
+        </Col>
+      </Row>
       <Row>
         {members.map(member=> (
           <Col sm={6} md={4} lg={3} xl={2} key={member.id}
