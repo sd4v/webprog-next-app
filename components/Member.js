@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Card, Button, Row, Col } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import styles from "./Member.module.css";
+import MemberButtons from "./MemberButtons";
 
 
 export const occupation = {
@@ -19,14 +20,6 @@ function Member({ name, occupation }) {
 
   const [editing, setEditing] = useState(false);
 
-  const onEditClick = () => setEditing(true);
-
-  const onCancelClick = () => setEditing(false);
-
-  const onSaveClick = () => setEditing(false);
-
-  const onDeleteClick = () => {};
-
   return (
     <Card>
       <Card.Img
@@ -42,48 +35,7 @@ function Member({ name, occupation }) {
             : <div>Edit mode</div>
           }
         </Card.Text>
-        <Row className={styles.buttonRow}>
-          {editing ? null : (
-            <Col>
-              <Button variant="primary"
-                className={styles.button}
-                onClick={onEditClick}
-              >
-                Edit
-              </Button>
-            </Col>
-          )}
-          {!editing ? null : (
-            <Col>
-              <Button variant="success"
-                className={styles.button}
-                onClick={onSaveClick}
-              >
-                Save
-              </Button>
-            </Col>
-          )}
-          {editing ? null : (
-            <Col>
-              <Button variant="danger"
-                className={styles.button}
-                onClick={onDeleteClick}
-              >
-                Delete
-              </Button>
-            </Col>
-          )}
-          {!editing ? null : (
-            <Col>
-              <Button variant="light"
-                className={styles.button}
-                onClick={onCancelClick}
-              >
-                Cancel
-              </Button>
-            </Col>
-          )}
-        </Row>
+        <MemberButtons editing={editing} setEditing={setEditing}/>
       </Card.Body>
     </Card>
   );
