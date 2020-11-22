@@ -19,12 +19,19 @@ export default function Home({ initMembers }) {
   const [members, setMembers] = useState(initMembers);
 
 
-  const saveMember = data => {
-    setMembers(prevMembers => prevMembers.map(
-      prevMember => prevMember._id !== data._id 
-        ? prevMember 
-        : data
-    ));
+  const saveMember = async data => {
+    const response = await fetch("api/updateRecord", { 
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+    
+    if (response.status === 200) {
+      setMembers(prevMembers => prevMembers.map(
+        prevMember => prevMember._id !== data._id 
+          ? prevMember 
+          : data
+      ));
+    }
   };
 
 
