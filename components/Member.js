@@ -30,8 +30,16 @@ function Member({ id, name, occupation, saveMember }) {
       />
       <Card.Body>
         {!editing 
-          ? <ViewMember name={name} setEditing={setEditing}/>
-          : <EditMember setEditing={setEditing}/>
+          ? <ViewMember name={name}
+                        occupation={occupation}
+                        setEditing={setEditing}
+            />
+          : <EditMember setEditing={setEditing}
+                        saveMember={saveMember}
+                        id={id}
+                        name={name}
+                        occupation={occupation}
+            />
         }
       </Card.Body>
     </Card>

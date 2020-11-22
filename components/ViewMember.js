@@ -3,7 +3,7 @@ import { Card, Row, Col, Button } from "react-bootstrap";
 import styles from "./Member.module.css";
 
 
-function ViewMember({ name, setEditing }) {
+function ViewMember({ name, occupation, setEditing }) {
 
   const onEditClick = () => setEditing(true);
 
@@ -13,7 +13,7 @@ function ViewMember({ name, setEditing }) {
     <>
       <Card.Title>{name}</Card.Title>
       <Card.Text>
-        Edit mode
+        I am a {occupation}.
       </Card.Text>
       <Row className={styles.buttonRow}>
         <Col>
