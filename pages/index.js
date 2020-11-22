@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
-import Member from "../components/Member";
+import Member, { occupation } from "../components/Member";
+import { headers } from "../config/db";
 import styles from "./index.module.css";
 
 
 export const MemberContext = React.createContext({});
+
+
+const defaultMember = {
+  name: "New member",
+  occupation: occupation.worker,
+};
 
 
 export default function Home({ initMembers }) {
@@ -28,11 +35,15 @@ export default function Home({ initMembers }) {
   };
 
 
-  const addMember = () => {
-    setMembers(prevMembers => {
-      const defaultMember = getDefaultMember(prevMembers.length + 1);
-      return [...prevMembers, defaultMember];
+  const addMember = async () => {
+    const response = await fetch("api/addNewRecord", { 
+      method: "POST",
+      body: JSON.stringify(defaultMember),
     });
+    
+    const newMember = await response.json();
+
+    setMembers(prevMembers => [...prevMembers, newMember]);
   };
 
 
