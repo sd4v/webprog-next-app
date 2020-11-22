@@ -1,60 +1,29 @@
 import React, { useState } from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
-import Member, { occupation } from "../components/Member";
+import Member from "../components/Member";
 import styles from "./index.module.css";
-
-
-const initData = [
-  {
-    id: 1,
-    name: "Ubul",
-    occupation: occupation.cooker,
-  },
-  {
-    id: 2,
-    name: "Jolán",
-    occupation: occupation.nurse,
-  },
-  {
-    id: 3,
-    name: "Jack",
-    occupation: occupation.surgeon,
-  },
-  {
-    id: 4,
-    name: "Bauer",
-    occupation: occupation.policeman,
-  },
-];
-
-
-const getDefaultMember = id => ({
-  id,
-  name: "New member",
-  occupation: occupation.worker,
-});
 
 
 export const MemberContext = React.createContext({});
 
 
-export default function Home() {
+export default function Home({ initMembers }) {
 
-  const [members, setMembers] = useState(initData);
+  const [members, setMembers] = useState(initMembers);
 
 
   const saveMember = data => {
     setMembers(prevMembers => prevMembers.map(
-      prevMember => prevMember.id !== data.id 
+      prevMember => prevMember._id !== data._id 
         ? prevMember 
         : data
     ));
   };
 
 
-  const deleteMember = id => {
+  const deleteMember = _id => {
     setMembers(prevMembers => 
-      prevMembers.filter(({ id: pId }) => pId !== id)
+      prevMembers.filter(({ _id: pId }) => pId !== _id)
     );
   };
 
@@ -78,7 +47,7 @@ export default function Home() {
       </Row>
       <Row>
         {members.map(member=> (
-          <Col sm={6} md={4} lg={3} xl={2} key={member.id}
+          <Col sm={6} md={4} lg={3} xl={2} key={member._id}
               className={styles.memberCol}>
             <MemberContext.Provider value={{
               ...member,
@@ -92,4 +61,28 @@ export default function Home() {
       </Row>
     </Container>
   );
+}
+
+
+export async function getServerSideProps() {
+  const fetchOptions = { 
+    method: "GET",
+    headers: 
+      { 
+        "cache-control": "no-cache",
+        "x-apikey": process.env.DB_API_KEY,
+      }
+  };
+  
+  const response = await fetch(process.env.DB_URL, fetchOptions);
+  
+  const initMembers = response.status === 200 
+    ? await response.json()
+    : {};
+
+  return {
+    props: {
+      initMembers,
+    },
+  }
 }

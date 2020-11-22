@@ -7,7 +7,7 @@ import { MemberContext } from "../pages";
 
 function EditMember({ setEditing }) {
 
-  const { saveMember, id, name, occupation } = useContext(MemberContext);
+  const { saveMember, _id, name, occupation } = useContext(MemberContext);
 
 
   const [ localName, setLocalName ] = useState(name);
@@ -27,7 +27,7 @@ function EditMember({ setEditing }) {
 
   const onSaveClick = () => {
     setEditing(false);
-    saveMember({ id, name: localName, occupation: localOccupation });
+    saveMember({ _id, name: localName, occupation: localOccupation });
   };
 
   return (
