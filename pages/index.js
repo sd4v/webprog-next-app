@@ -1,9 +1,14 @@
-import Head from 'next/head'
+import { Row, Button, Col } from "react-bootstrap";
 
 export default function Home() {
   return (
-    <div>
-      Hello
-    </div>
-  )
+    <Row>
+      <Col>
+        <p>Hello</p>
+      </Col>
+      <Col xs={12}>
+        <Button>Click me</Button>
+      </Col>
+    </Row>
+  );
 }
