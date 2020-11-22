@@ -67,14 +67,10 @@ export default function Home({ initMembers }) {
 export async function getServerSideProps() {
   const fetchOptions = { 
     method: "GET",
-    headers: 
-      { 
-        "cache-control": "no-cache",
-        "x-apikey": process.env.DB_API_KEY,
-      }
+    headers,
   };
   
-  const response = await fetch(process.env.DB_URL, fetchOptions);
+  const response = await fetch(`${process.env.DB_URL}/members`, fetchOptions);
   
   const initMembers = response.status === 200 
     ? await response.json()
