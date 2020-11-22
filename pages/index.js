@@ -28,10 +28,17 @@ export default function Home({ initMembers }) {
   };
 
 
-  const deleteMember = _id => {
-    setMembers(prevMembers => 
-      prevMembers.filter(({ _id: pId }) => pId !== _id)
-    );
+  const deleteMember = async _id => {
+    const response = await fetch("api/deleteRecord", { 
+      method: "POST",
+      body: JSON.stringify({ _id }),
+    });
+
+    if (response.status === 200) {
+      setMembers(prevMembers => 
+        prevMembers.filter(({ _id: pId }) => pId !== _id)
+      );
+    }
   };
 
 
