@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
+import { MemberContext } from "../pages";
 import styles from "./Member.module.css";
 
 
-function ViewMember({ name, occupation, setEditing }) {
+function ViewMember({ setEditing }) {
+
+  const { name, occupation } = useContext(MemberContext);
+  
 
   const onEditClick = () => setEditing(true);
 

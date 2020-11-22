@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Card } from "react-bootstrap";
 import styles from "./Member.module.css";
 import EditMember from "./EditMember";
 import ViewMember from "./ViewMember";
+import { MemberContext } from "../pages";
 
 
 export const occupation = {
@@ -17,7 +18,9 @@ export const occupation = {
 };
 
 
-function Member({ id, name, occupation, saveMember }) {
+function Member() {
+
+  const { occupation } = useContext(MemberContext);
 
   const [editing, setEditing] = useState(false);
 
@@ -30,16 +33,8 @@ function Member({ id, name, occupation, saveMember }) {
       />
       <Card.Body>
         {!editing 
-          ? <ViewMember name={name}
-                        occupation={occupation}
-                        setEditing={setEditing}
-            />
-          : <EditMember setEditing={setEditing}
-                        saveMember={saveMember}
-                        id={id}
-                        name={name}
-                        occupation={occupation}
-            />
+          ? <ViewMember setEditing={setEditing}/>
+          : <EditMember setEditing={setEditing}/>
         }
       </Card.Body>
     </Card>

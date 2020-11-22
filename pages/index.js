@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import Member, { occupation } from "../components/Member";
 import styles from "./index.module.css";
@@ -28,6 +28,9 @@ const initData = [
 ];
 
 
+export const MemberContext = React.createContext({});
+
+
 export default function Home() {
 
   const [members, setMembers] = useState(initData);
@@ -47,7 +50,12 @@ export default function Home() {
         {members.map(member=> (
           <Col sm={6} md={4} lg={3} xl={2} key={member.id}
               className={styles.memberCol}>
-            <Member {...member} saveMember={saveMember}/>
+            <MemberContext.Provider value={{
+              ...member,
+              saveMember
+            }}>
+              <Member/>
+            </MemberContext.Provider>
           </Col>
         ))}
       </Row>

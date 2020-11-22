@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Card, Row, Col, Button, Form } from "react-bootstrap";
 import styles from "./Member.module.css";
 import { occupation as occupations } from "./Member";
+import { MemberContext } from "../pages";
 
 
-function EditMember({ setEditing, saveMember, id, name, occupation }) {
+function EditMember({ setEditing }) {
+
+  const { saveMember, id, name, occupation } = useContext(MemberContext);
+
 
   const [ localName, setLocalName ] = useState(name);
   const [ localOccupation, setLocalOccupation ] = useState(occupation);
