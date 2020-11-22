@@ -6,3 +6,12 @@
   background-color: #acc;
   padding: 1rem;
 }
+
+.buttonRow {
+  width: fit-content;
+}
+
+.button {
+  margin-top: 0.8rem;
+  text-transform: uppercase;
+}

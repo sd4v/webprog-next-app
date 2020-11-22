@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Card } from "react-bootstrap";
 import styles from "./Member.module.css";
-import MemberButtons from "./MemberButtons";
+import EditMember from "./EditMember";
+import ViewMember from "./ViewMember";
 
 
 export const occupation = {
@@ -28,14 +29,10 @@ function Member({ id, name, occupation, saveMember }) {
         className={styles.memberImg}
       />
       <Card.Body>
-        <Card.Title>{name}</Card.Title>
-        <Card.Text>
-          {!editing 
-            ? <span>I am a {occupation}.</span>
-            : <span>Edit mode</span>
-          }
-        </Card.Text>
-        <MemberButtons editing={editing} setEditing={setEditing}/>
+        {!editing 
+          ? <ViewMember name={name} setEditing={setEditing}/>
+          : <EditMember setEditing={setEditing}/>
+        }
       </Card.Body>
     </Card>
   );
