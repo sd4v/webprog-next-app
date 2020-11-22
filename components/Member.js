@@ -31,8 +31,8 @@ function Member({ name, occupation }) {
         <Card.Title>{name}</Card.Title>
         <Card.Text>
           {!editing 
-            ? <div>I am a {occupation}.</div> 
-            : <div>Edit mode</div>
+            ? <span>I am a {occupation}.</span>
+            : <span>Edit mode</span>
           }
         </Card.Text>
         <MemberButtons editing={editing} setEditing={setEditing}/>
