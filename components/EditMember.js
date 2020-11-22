@@ -1,6 +1,7 @@
 import React from "react";
-import { Card, Row, Col, Button } from "react-bootstrap";
+import { Card, Row, Col, Button, Form } from "react-bootstrap";
 import styles from "./Member.module.css";
+import { occupation as occupations } from "./Member";
 
 
 function EditMember({ setEditing }) {
@@ -12,22 +13,36 @@ function EditMember({ setEditing }) {
   return (
     <>
       <Card.Title>Edit member</Card.Title>
-      <Card.Text>
-        Edit mode
-      </Card.Text>
+      <Form>
+        <Form.Group>
+          <Form.Label>Name</Form.Label>
+          <Form.Control type="input"
+                        placeholder="Enter name"
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Occupation</Form.Label>
+          <Form.Control as="select"
+          >
+            {Object.values(occupations).map(occupation => (
+              <option key={occupation}>{occupation}</option>
+            ))}
+          </Form.Control>
+        </Form.Group>
+      </Form>
       <Row className={styles.buttonRow}>
         <Col>
           <Button variant="success"
-            className={styles.button}
-            onClick={onSaveClick}
+                  className={styles.button}
+                  onClick={onSaveClick}
           >
             Save
           </Button>
         </Col>
         <Col>
           <Button variant="light"
-            className={styles.button}
-            onClick={onCancelClick}
+                  className={styles.button}
+                  onClick={onCancelClick}
           >
             Cancel
           </Button>
