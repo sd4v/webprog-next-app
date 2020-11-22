@@ -35,12 +35,20 @@ export default function Home() {
 
   const [members, setMembers] = useState(initData);
 
+
   const saveMember = data => {
     setMembers(prevMembers => prevMembers.map(
       prevMember => prevMember.id !== data.id 
         ? prevMember 
         : data
     ));
+  };
+
+
+  const deleteMember = id => {
+    setMembers(prevMembers => 
+      prevMembers.filter(({ id: pId }) => pId !== id)
+    );
   };
 
 
@@ -52,7 +60,8 @@ export default function Home() {
               className={styles.memberCol}>
             <MemberContext.Provider value={{
               ...member,
-              saveMember
+              saveMember,
+              deleteMember,
             }}>
               <Member/>
             </MemberContext.Provider>

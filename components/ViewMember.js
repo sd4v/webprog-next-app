@@ -6,12 +6,12 @@ import styles from "./Member.module.css";
 
 function ViewMember({ setEditing }) {
 
-  const { name, occupation } = useContext(MemberContext);
-  
+  const { id, name, occupation, deleteMember } = useContext(MemberContext);
+
 
   const onEditClick = () => setEditing(true);
 
-  const onDeleteClick = () => {};
+  const onDeleteClick = () => deleteMember(id);
 
   return (
     <>
