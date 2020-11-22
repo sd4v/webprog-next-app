@@ -1,0 +1,13 @@
+.memberImg {
+  object-fit: contain;
+  height: 8rem;
+  max-height: 256px;
+  width: auto;
+  background-color: #acc;
+  padding: 1rem;
+}
+
+.button {
+  margin-top: 0.8rem;
+  text-transform: uppercase;
+}
