@@ -20,32 +20,28 @@ export default function Home({ initMembers }) {
 
 
   const saveMember = async data => {
-    const response = await fetch("api/updateRecord", { 
+    setMembers(prevMembers => prevMembers.map(
+      prevMember => prevMember._id !== data._id 
+        ? prevMember 
+        : data
+    ));
+
+    await fetch("api/updateRecord", { 
       method: "POST",
       body: JSON.stringify(data),
     });
-    
-    if (response.status === 200) {
-      setMembers(prevMembers => prevMembers.map(
-        prevMember => prevMember._id !== data._id 
-          ? prevMember 
-          : data
-      ));
-    }
   };
 
 
   const deleteMember = async _id => {
-    const response = await fetch("api/deleteRecord", { 
+    setMembers(prevMembers => 
+      prevMembers.filter(({ _id: pId }) => pId !== _id)
+    );
+
+    await fetch("api/deleteRecord", { 
       method: "POST",
       body: JSON.stringify({ _id }),
     });
-
-    if (response.status === 200) {
-      setMembers(prevMembers => 
-        prevMembers.filter(({ _id: pId }) => pId !== _id)
-      );
-    }
   };
 
 
