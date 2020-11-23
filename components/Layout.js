@@ -1,9 +1,14 @@
 import { Nav, Navbar } from "react-bootstrap";
+import Head from "next/head";
 
 
 function Layout({ children }) {
   return (
     <>
+      <Head>
+        <title>Webprog Next.js app</title>
+        <link rel="icon" href="/favicon.ico"/>
+      </Head>
       <Navbar bg="primary" variant="dark" expand="lg">
         <Navbar.Brand href="/">Webprog Next.js app</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
