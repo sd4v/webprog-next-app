@@ -26,11 +26,14 @@ function Member() {
 
   return (
     <Card>
-      <Card.Img
-        variant="top"
-        src={`images/avatar-${occupation}.png`}
-        className={styles.memberImg}
-      />
+      <Card.Img variant="top" 
+                as="div" 
+                className={styles.imgWrapper}
+      >
+        <img src={`images/avatar-${occupation}.png`}
+                  className={styles.memberImg}
+        />
+      </Card.Img>
       <Card.Body>
         {!editing 
           ? <ViewMember setEditing={setEditing}/>
