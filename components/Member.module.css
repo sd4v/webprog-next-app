@@ -6,8 +6,11 @@
 
 .memberImg {
   width: 8rem;
+  height: 8rem;
+  min-width: 8rem;
+  min-height: 8rem;
   max-width: 256px;
-  height: auto;
+  max-height: 256px;
   padding: 1rem;
 }
 
